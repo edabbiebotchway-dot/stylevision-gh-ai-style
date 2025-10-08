@@ -1,7 +1,11 @@
-import { Camera, Sparkles, BookOpen, Heart, ArrowRight, CheckCircle, Calendar, Briefcase, Users, Shirt } from "lucide-react";
+import { useState } from "react";
+import { Camera, Sparkles, BookOpen, Heart, ArrowRight, CheckCircle, Calendar, Briefcase, Users, Shirt, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HowItWorks = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const steps = [
     {
       icon: Heart,
@@ -64,6 +68,73 @@ const HowItWorks = () => {
     "Digital format - access anywhere",
     "New styles added monthly"
   ];
+
+  // Lookbook gallery images
+  const lookbookPages = [
+    {
+      src: "/lookbook/workwear-cover.jpg",
+      title: "WORKWEAR",
+      subtitle: "Professional Styles for the Modern Office",
+      category: "work"
+    },
+    {
+      src: "/lookbook/workwear-1.jpg",
+      title: "Elegant White Dress",
+      subtitle: "Sleek, contemporary power",
+      category: "work"
+    },
+    {
+      src: "/lookbook/workwear-2.jpg",
+      title: "Navy Professional Suit",
+      subtitle: "Confident, refined professionalism",
+      category: "work"
+    },
+    {
+      src: "/lookbook/glamnight-cover.jpg",
+      title: "GLAM NIGHTS",
+      subtitle: "Venus Gown - Modern allure, captivating elegance",
+      category: "evening"
+    },
+    {
+      src: "/lookbook/glamnight-1.jpg",
+      title: "Venus Gown - Navy",
+      subtitle: "Flowing elegance for special occasions",
+      category: "evening"
+    },
+    {
+      src: "/lookbook/glamnight-2.jpg",
+      title: "Evening Elegance",
+      subtitle: "Nightfall Chic - Flowing silk & modern drape",
+      category: "evening"
+    },
+    {
+      src: "/lookbook/glamnight-3.jpg",
+      title: "Starlight Dress",
+      subtitle: "Irresistible party chic",
+      category: "evening"
+    }
+  ];
+
+  const openLightbox = (index) => {
+    setSelectedImage(lookbookPages[index]);
+    setCurrentIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setSelectedImage(null);
+  };
+
+  const goToNext = () => {
+    const nextIndex = (currentIndex + 1) % lookbookPages.length;
+    setCurrentIndex(nextIndex);
+    setSelectedImage(lookbookPages[nextIndex]);
+  };
+
+  const goToPrevious = () => {
+    const prevIndex = (currentIndex - 1 + lookbookPages.length) % lookbookPages.length;
+    setCurrentIndex(prevIndex);
+    setSelectedImage(lookbookPages[prevIndex]);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
@@ -144,18 +215,54 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl p-12 mb-20">
-          <h2 className="text-4xl font-bold text-center mb-6 text-gray-900">
-            See a Sample Lookbook
-          </h2>
-          <p className="text-center text-gray-600 mb-8 text-lg">
-            Professional layouts, curated styles, designed just for you
-          </p>
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl aspect-[3/4] max-w-2xl mx-auto flex items-center justify-center">
-            <div className="text-center p-8">
-              <BookOpen className="w-20 h-20 mx-auto mb-4 text-purple-600" />
-              <p className="text-gray-700 text-lg font-semibold">Sample Lookbook Preview</p>
-              <p className="text-gray-600 text-sm mt-2">Beautifully designed digital style guides</p>
+        {/* LOOKBOOK GALLERY SECTION - THIS IS WHERE IT GOES */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-20">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold mb-4 text-gray-900">
+              Preview: Sample Lookbook Pages
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              See the quality and style of our AI-curated fashion guides
+            </p>
+          </div>
+
+          {/* Image Gallery Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            {lookbookPages.map((page, index) => (
+              <div
+                key={index}
+                className="relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300"
+                onClick={() => openLightbox(index)}
+              >
+                {/* Placeholder gradient for missing images */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-200 via-pink-200 to-orange-200"></div>
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <div className="text-white">
+                    <p className="font-semibold text-sm">{page.title}</p>
+                    <p className="text-xs opacity-90">{page.subtitle}</p>
+                  </div>
+                </div>
+
+                {/* Page number indicator */}
+                <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-semibold text-gray-700">
+                  {index + 1}/{lookbookPages.length}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Instructions */}
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 text-center">
+            <p className="text-gray-700 font-medium mb-2">
+              ✨ This is just a sample! Your personalized lookbook will include:
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600">
+              <span>• Styles matching YOUR preferences</span>
+              <span>• Colors that complement YOUR skin tone</span>
+              <span>• Outfits for YOUR occasions</span>
+              <span>• Professional PDF format</span>
             </div>
           </div>
         </div>
@@ -231,6 +338,46 @@ const HowItWorks = () => {
           </p>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-10"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <button
+            onClick={goToPrevious}
+            className="absolute left-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <div className="max-w-4xl max-h-[90vh] flex flex-col items-center">
+            <div className="relative aspect-[3/4] w-full max-w-2xl rounded-lg overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-300 via-pink-300 to-orange-300"></div>
+            </div>
+            
+            <div className="mt-6 text-center text-white">
+              <h3 className="text-2xl font-bold mb-2">{selectedImage.title}</h3>
+              <p className="text-gray-300">{selectedImage.subtitle}</p>
+              <p className="text-sm text-gray-400 mt-2">
+                Page {currentIndex + 1} of {lookbookPages.length}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={goToNext}
+            className="absolute right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+      )}
 
       <div className="h-20"></div>
     </div>
