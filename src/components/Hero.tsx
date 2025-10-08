@@ -34,12 +34,12 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#services">
+            <Link to="/pricing">
               <Button variant="hero" size="xl" className="group w-full sm:w-auto">
                 Browse Style Guides
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </a>
+            </Link>
             
             <Link to="/how-it-works">
               <Button variant="outline" size="xl" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-foreground w-full sm:w-auto">
@@ -55,7 +55,7 @@ const Hero = () => {
               <div className="text-sm text-white/80">Style Combinations</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary mb-1">GHC 40</div>
+              <div className="text-3xl font-bold text-primary mb-1">From GHC 100</div>
               <div className="text-sm text-white/80">Starting Price</div>
             </div>
             <div>
