@@ -1,6 +1,47 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Instagram, Facebook, MessageCircle, Mail } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
+const ContactFormContent = () => (
+  <>
+    <div className="grid gap-4 py-4">
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">
+          Name
+        </Label>
+        <Input id="name" className="col-span-3" />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="contact" className="text-right">
+          Contact
+        </Label>
+        <Input id="contact" className="col-span-3" />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="email" className="text-right">
+          Email
+        </Label>
+        <Input id="email" type="email" className="col-span-3" />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="location" className="text-right">
+          Location
+        </Label>
+        <Input id="location" className="col-span-3" />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="message" className="text-right">
+          Message
+        </Label>
+        <Textarea id="message" className="col-span-3" />
+      </div>
+    </div>
+    <Button type="submit">Send Message</Button>
+  </>
+);
 
 const Footer = () => {
   return (
@@ -59,16 +100,23 @@ const Footer = () => {
             <p className="text-secondary-foreground/80 mb-4 text-sm">
               Get style tips and exclusive offers delivered to your inbox.
             </p>
-            <div className="flex gap-2">
-              <Input 
-                type="email" 
-                placeholder="Your email"
-                className="bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground placeholder:text-secondary-foreground/50"
-              />
-              <Button variant="hero" size="icon">
-                <Mail className="w-4 h-4" />
-              </Button>
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="flex gap-2">
+                  <Input 
+                    type="email" 
+                    placeholder="Your email"
+                    className="bg-secondary-foreground/10 border-secondary-foreground/20 text-secondary-foreground placeholder:text-secondary-foreground/50"
+                  />
+                  <Button variant="hero" size="icon">
+                    <Mail className="w-4 h-4" />
+                  </Button>
+                </div>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <ContactFormContent />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 

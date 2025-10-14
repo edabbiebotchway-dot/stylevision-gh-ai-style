@@ -234,9 +234,9 @@ const HowItWorks = () => {
                 className="relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300"
                 onClick={() => openLightbox(index)}
               >
-                {/* Placeholder gradient for missing images */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-200 via-pink-200 to-orange-200"></div>
-                
+                {/* The actual image */}
+                <img src={page.src} alt={page.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <div className="text-white">
@@ -358,7 +358,7 @@ const HowItWorks = () => {
 
           <div className="max-w-4xl max-h-[90vh] flex flex-col items-center">
             <div className="relative aspect-[3/4] w-full max-w-2xl rounded-lg overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-300 via-pink-300 to-orange-300"></div>
+              <img src={selectedImage.src} alt={selectedImage.title} className="w-full h-full object-contain" />
             </div>
             
             <div className="mt-6 text-center text-white">

@@ -1,6 +1,9 @@
 import { Book, Briefcase, Sparkles, ShoppingBag, Crown, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import casualImage from "@/assets/style-guide-casual.jpg";
+import professionalImage from "@/assets/style-guide-professional.jpg";
+import eveningImage from "@/assets/style-guide-evening.jpg";
 
 const services = [
   {
@@ -11,7 +14,8 @@ const services = [
     features: ["Comfortable & stylish looks", "Mix & match options", "Budget-friendly pieces"],
     color: "from-purple-500 to-pink-500",
     link: "https://selar.com/8889217w19",
-    popular: false
+    popular: false,
+    image: casualImage
   },
   {
     icon: Briefcase,
@@ -21,7 +25,8 @@ const services = [
     features: ["Power dressing essentials", "Conservative to creative looks", "Seasonal variations"],
     color: "from-blue-500 to-purple-500",
     link: "https://selar.com/5w0975u30d",
-    popular: true
+    popular: true,
+    image: professionalImage
   },
   {
     icon: Sparkles,
@@ -31,7 +36,8 @@ const services = [
     features: ["Wedding guest styles", "Date night perfection", "Formal event ready"],
     color: "from-pink-500 to-orange-500",
     link: "https://selar.com/5w0975u30d",
-    popular: true
+    popular: true,
+    image: eveningImage
   },
   {
     icon: ShoppingBag,
@@ -92,6 +98,10 @@ const Services = () => {
                 <div className="absolute top-0 right-0 bg-gradient-to-r from-yellow-500 to-pink-500 text-white px-4 py-1 rounded-bl-2xl text-xs font-bold">
                   {service.badge}
                 </div>
+              )}
+
+              {service.image && (
+                <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />
               )}
 
               {/* Icon Header */}
