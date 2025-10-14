@@ -76,6 +76,70 @@ const Pricing = () => {
     }
   ];
 
+  return (
+    <div className="bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 min-h-screen">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Header */}
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-gray-900">
+            Find Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Perfect Plan</span>
+          </h1>
+          <p className="text-lg text-gray-600">
+            Transparent pricing for every style journey. No hidden fees. Ever.
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20 items-start">
+          {packages.map((pkg, index) => (
+            <div
+              key={index}
+              className={`relative bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl ${
+                pkg.popular ? 'ring-4 ring-pink-500 scale-105' : 'hover:scale-105'
+              }`}
+            >
+              {pkg.popular && (
+                <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                  <div className="bg-gradient-to-r from-pink-500 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                    MOST POPULAR
+                  </div>
+                </div>
+              )}
+              
+              <div className={`p-8 bg-gradient-to-br ${pkg.bgColor}`}>
+                <div className={`inline-block p-3 rounded-2xl bg-gradient-to-r ${pkg.color} mb-4`}>
+                  <pkg.icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-500 uppercase tracking-widest">{pkg.name}</h3>
+                <p className="text-lg text-gray-600 mb-4">{pkg.subtitle}</p>
+                <div className="flex items-baseline text-gray-900">
+                  <span className="text-lg font-semibold">GHC</span>
+                  <span className="text-5xl font-extrabold ml-2">{pkg.price}</span>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <p className="text-sm text-gray-600 mb-6 h-12">{pkg.ideal}</p>
+                <ul className="space-y-4 mb-8">
+                  {pkg.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a href={pkg.link} target="_blank" rel="noopener noreferrer" className="block">
+                  <Button 
+                    className={`w-full bg-gradient-to-r ${pkg.color} hover:opacity-90 text-white rounded-full shadow-lg hover:shadow-xl transition-all py-6 text-lg font-bold`}
+                  >
+                    Get Started <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Comparison Table */}
         <CompareTable />
 
@@ -107,21 +171,21 @@ const Pricing = () => {
             <details className="group p-4 rounded-xl bg-gray-50 hover:bg-gray-100 cursor-pointer">
               <summary className="font-semibold text-gray-900 flex justify-between items-center">
                 How quickly will I receive my lookbook?
-                <span className="text-gray-400">+</span>
+                <span className="text-gray-400 group-open:rotate-45 transition-transform">+</span>
               </summary>
               <p className="mt-3 text-gray-600">Basic: 48 hours | Premium: 24 hours | VIP: 12 hours. All delivered via email and WhatsApp.</p>
             </details>
             <details className="group p-4 rounded-xl bg-gray-50 hover:bg-gray-100 cursor-pointer">
               <summary className="font-semibold text-gray-900 flex justify-between items-center">
                 Can I upgrade my package later?
-                <span className="text-gray-400">+</span>
+                <span className="text-gray-400 group-open:rotate-45 transition-transform">+</span>
               </summary>
               <p className="mt-3 text-gray-600">Yes! Contact us and pay only the difference to upgrade from Basic → Premium or Premium → VIP.</p>
             </details>
             <details className="group p-4 rounded-xl bg-gray-50 hover:bg-gray-100 cursor-pointer">
               <summary className="font-semibold text-gray-900 flex justify-between items-center">
                 What payment methods do you accept?
-                <span className="text-gray-400">+</span>
+                <span className="text-gray-400 group-open:rotate-45 transition-transform">+</span>
               </summary>
               <p className="mt-3 text-gray-600">Mobile Money, Bank Transfer, Debit/Credit Cards - all secured by Selar payment platform.</p>
             </details>
