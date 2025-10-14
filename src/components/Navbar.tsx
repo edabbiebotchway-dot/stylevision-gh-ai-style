@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,9 +32,11 @@ const Navbar = () => {
             <a href="#testimonials" className="text-foreground hover:text-primary transition-colors font-medium">
               Reviews
             </a>
-            <Button variant="hero" size="default">
-              Get Started
-            </Button>
+            <Link to="/pricing">
+              <Button variant="hero" size="default">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -75,9 +78,11 @@ const Navbar = () => {
             >
               Reviews
             </a>
-            <Button variant="hero" className="w-full" size="lg">
-              Get Started
-            </Button>
+            <Link to="/pricing">
+              <Button variant="hero" className="w-full" size="lg">
+                Get Started
+              </Button>
+            </Link>
           </div>
         )}
       </div>
